@@ -20,10 +20,23 @@ class App extends Component {
     console.log('clicked');
     // this.state.persons[0].name = 'Jayyyson'; // this will not work as you are updating state directly
     this.setState({ persons: [ {
-      name: newName,
+      name: 'JAYYYSON',
       age: 30
     },{
       name: 'Bill',
+      age: 60
+    },{
+      name: 'Joe',
+      age: 34
+    } ] })
+  }
+
+  nameChangeHandler = (event) => {
+    this.setState({ persons: [ {
+      name: 'Jason',
+      age: 30
+    },{
+      name: event.target.value,
       age: 60
     },{
       name: 'Joe',
@@ -41,6 +54,7 @@ class App extends Component {
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age}/>
         <Person 
+          changed={this.nameChangeHandler}
           name={this.state.persons[1].name} 
           age={this.state.persons[1].age}>I never thought losing my mind would be so hard.</Person>
         <Person 
