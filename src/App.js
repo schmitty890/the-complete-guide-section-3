@@ -4,16 +4,12 @@ import Person from './Person/Person';
 
 class App extends Component {
   state = {
-    persons: [{
-      name: 'Jason',
-      age: 29
-    },{
-      name: 'Bill',
-      age: 60
-    },{
-      name: 'Joe',
-      age: 34
-    }]
+    persons: [ 
+      { name: 'Jason', age: 29 },
+      { name: 'Bill', age: 60 },
+      { name: 'Joe', age: 34 }
+    ],
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -44,6 +40,14 @@ class App extends Component {
     } ] })
   }
 
+  togglePersonsHandler = () => { // use arrow function to return to the this keyword of this class
+    console.log('togglePersonsHandler');
+    const doesShow = this.state.showPersons;
+    this.setState({
+      showPersons: !doesShow
+    })
+  }
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -57,18 +61,22 @@ class App extends Component {
         <h1>Hi, i'm a component</h1>
         <button 
           style={style}
-          onClick={this.switchNameHandler.bind(this, 'JASON')}>switch name</button>
-        <Person 
-          click={this.switchNameHandler.bind(this, 'jason!')} 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age}/>
-        <Person 
-          changed={this.nameChangeHandler}
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}>I never thought losing my mind would be so hard.</Person>
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}/>
+          onClick={this.togglePersonsHandler}>switch name</button>
+        { this.state.showPersons ? 
+        <div>
+          <Person 
+            click={this.switchNameHandler.bind(this, 'jason!')} 
+            name={this.state.persons[0].name} 
+            age={this.state.persons[0].age}/>
+          <Person 
+            changed={this.nameChangeHandler}
+            name={this.state.persons[1].name} 
+            age={this.state.persons[1].age}>I never thought losing my mind would be so hard.</Person>
+          <Person 
+            name={this.state.persons[2].name} 
+            age={this.state.persons[2].age}/>
+        </div> : null }
+        
       </div>
     );
   }
