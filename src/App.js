@@ -28,7 +28,8 @@ class App extends Component {
   deletePersonHandler = (personIndex) => {
     console.log('deletePersonHandler');
     console.log(personIndex);
-    const persons = this.state.persons;
+    // const persons = this.state.persons.slice(); // splice creates copy of array, spread is more modern way 
+    const persons = [...this.state.persons]; // spread operator is more common to create a new array
     persons.splice(personIndex, 1);
     this.setState({ persons: persons });
   }
