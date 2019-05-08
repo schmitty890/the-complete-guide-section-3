@@ -13,19 +13,25 @@ class App extends Component {
   }
 
   nameChangeHandler = (event, id) => {
+    // find the single person by reaching out to the state, we call findIndex to find the specific person that matches our id.
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     });
     
+    // get the person by accessing the element at the person index.
+    // we create a person variable so we don't mutate the original state
     const person = {
       ...this.state.persons[personIndex]
     };
 
+    // we update the person name from the copy of our persons state
     person.name = event.target.value;
 
+    // we update the array at the position of our id passed into our nameChangeHandler function
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
+    // now that we have an updated persons array for our state, we call setState to update the state of our persons.
     this.setState({ persons: persons });
   }
 
