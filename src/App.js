@@ -56,13 +56,10 @@ class App extends Component {
       padding: '8px'
     };
 
-    return (
-      <div className="App">
-        <h1>Hi, i'm a component</h1>
-        <button 
-          style={style}
-          onClick={this.togglePersonsHandler}>switch name</button>
-        { this.state.showPersons ? 
+    let persons = null;
+
+    if(this.state.showPersons) {
+      persons = (
         <div>
           <Person 
             click={this.switchNameHandler.bind(this, 'jason!')} 
@@ -75,8 +72,17 @@ class App extends Component {
           <Person 
             name={this.state.persons[2].name} 
             age={this.state.persons[2].age}/>
-        </div> : null }
-        
+        </div>        
+      );
+    }
+
+    return (
+      <div className="App">
+        <h1>Hi, i'm a component</h1>
+        <button 
+          style={style}
+          onClick={this.togglePersonsHandler}>switch name</button>
+        {persons}
       </div>
     );
   }
