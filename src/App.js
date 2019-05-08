@@ -12,21 +12,6 @@ class App extends Component {
     showPersons: false
   }
 
-  switchNameHandler = (newName) => {
-    console.log('clicked');
-    // this.state.persons[0].name = 'Jayyyson'; // this will not work as you are updating state directly
-    this.setState({ persons: [ {
-      name: 'JAYYYSON',
-      age: 30
-    },{
-      name: 'Bill',
-      age: 60
-    },{
-      name: 'Joe',
-      age: 34
-    } ] })
-  }
-
   nameChangeHandler = (event) => {
     this.setState({ persons: [ {
       name: 'Jason',
@@ -38,6 +23,14 @@ class App extends Component {
       name: 'Joe',
       age: 34
     } ] })
+  }
+
+  deletePersonHandler = (personIndex) => {
+    console.log('deletePersonHandler');
+    console.log(personIndex);
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons });
   }
 
   togglePersonsHandler = () => { // use arrow function to return to the this keyword of this class
@@ -61,8 +54,10 @@ class App extends Component {
     if(this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
+          {this.state.persons.map((person, index) => {
             return <Person
+              key={index}
+              click={() => this.deletePersonHandler(index)}
               name={person.name} 
               age={person.age} />
           })}
