@@ -6,10 +6,20 @@ const cockpit = (props) => {
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
     setTimeout(function() {
-      alert('saved data to cloud');
+      console.log('saved data to cloud');
     }, 1000);
+    return () => {
+      console.log('[Cockpit.js] cleanup work in useEffect');
+    }
   }, []); // pass an empty array if you only want useEffect to fire once.
   // pass in the array props.persons if you want useEffect to fire every time your persons data state has changed.
+
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect');
+    return() => {
+      console.log('[Cockpit.js] cleanup work in 2nd useEffect');
+    }
+  }) 
 
   const assignedClasses = [];
 
