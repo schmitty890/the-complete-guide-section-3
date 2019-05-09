@@ -5,7 +5,12 @@ import classes from './Cockpit.css';
 const cockpit = (props) => {
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
-  })
+    setTimeout(function() {
+      alert('saved data to cloud');
+    }, 1000);
+  }, []); // pass an empty array if you only want useEffect to fire once.
+  // pass in the array props.persons if you want useEffect to fire every time your persons data state has changed.
+
   const assignedClasses = [];
 
   let btnClass = '';
